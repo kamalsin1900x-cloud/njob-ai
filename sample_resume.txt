@@ -1,0 +1,5 @@
+John Doe
+Software Engineer
+john.doe@example.com
+Phone: 123-456-7890
+Experienced full‑stack developer with 5 years of experience building web applications.
