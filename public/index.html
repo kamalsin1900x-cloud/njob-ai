@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NJob AI — AI-Powered Job Search & Placement</title>
+    <meta name="description" content="NJob AI uses artificial intelligence to match your clients with the best jobs across all major portals in India. Upload a resume, get instant relevancy scores.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ─── SIDEBAR ─────────────────────────────────────────────────────── -->
+    <aside id="sidebar">
+        <div class="sidebar-logo">
+            <div class="brand-title">
+                <span class="brand-name">NJob</span><span class="brand-ai">AI</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <button class="sidebar-nav-btn active" id="nav-home" onclick="showView('home')">
+                <span class="nav-icon">🏠</span> Home
+            </button>
+            <button class="sidebar-nav-btn" id="nav-services" onclick="showView('services')">
+                <span class="nav-icon">⚙️</span> Services
+            </button>
+            <button class="sidebar-nav-btn" id="nav-about" onclick="showView('about')">
+                <span class="nav-icon">ℹ️</span> About
+            </button>
+        </nav>
+
+        <div class="sidebar-section-label">CLIENTS</div>
+
+        <div class="sidebar-search-wrap">
+            <span class="sidebar-search-icon">🔍</span>
+            <input type="text" id="client-search-input" class="sidebar-search" placeholder="Search clients...">
+        </div>
+
+        <div id="sidebar-clients-list">
+            <!-- Client tabs injected here -->
+        </div>
+
+        <button class="btn-add-client" id="btn-add-client">
+            <span>+</span> Add New Client
+        </button>
+    </aside>
+
+    <!-- ─── MAIN CONTENT ─────────────────────────────────────────────────── -->
+    <div class="main-wrapper">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+            <div class="topbar-title" id="topbar-title">Welcome to NJob AI</div>
+            <div class="topbar-sub" id="topbar-sub">Your AI-powered recruitment platform</div>
+        </header>
+
+        <!-- VIEW: HOME PAGE -->
+        <div id="view-home" class="view active-view">
+
+            <!-- Hero Banner -->
+            <section class="hero-section">
+                <img src="hero_banner.jpg" alt="AI Job Search Banner" class="hero-image">
+                <div class="hero-overlay">
+                    <h1 class="hero-title">Find the Right Job.<br><span class="hero-accent">With the Power of AI.</span></h1>
+                    <p class="hero-subtitle">Upload a client's resume once. Our AI scrapes 8+ job portals across India and scores every listing by relevancy — automatically.</p>
+                    <button class="btn-hero" id="btn-hero-start">Get Started →</button>
+                </div>
+            </section>
+
+            <!-- Stats Strip -->
+            <section class="stats-strip">
+                <div class="stat-item">
+                    <div class="stat-number">8+</div>
+                    <div class="stat-label">Job Portals Scraped</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">AI</div>
+                    <div class="stat-label">Relevancy Scoring</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1-Click</div>
+                    <div class="stat-label">Job Search</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Client Profiles Saved</div>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section class="features-section">
+                <h2 class="section-title">How It Works</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📄</div>
+                        <h3>Upload Resume</h3>
+                        <p>Upload your client's resume once. Our AI extracts their profile, target role, and experience summary automatically.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>One-Click Search</h3>
+                        <p>With a single click, we simultaneously search LinkedIn, Naukri, Indeed, IIMJobs and 4 more portals across India.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>AI Relevancy Score</h3>
+                        <p>Every job is scored 0–100% by AI against your client's resume. Results are sorted so the best matches come first.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💾</div>
+                        <h3>Save Client Profiles</h3>
+                        <p>Client profiles are stored permanently. Come back any time and search for them in seconds — no re-uploading needed.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- VIEW: SERVICES -->
+        <div id="view-services" class="view hidden">
+            <section class="page-section">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-sub">Everything you need to run a modern AI-powered recruitment desk.</p>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🤖</div>
+                        <h3>AI Resume Parsing</h3>
+                        <p>Instant extraction of candidate name, target role, industry, location, and experience summary from any PDF or text resume.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🌐</div>
+                        <h3>Multi-Portal Job Scraping</h3>
+                        <p>Simultaneous job search across LinkedIn, Naukri, Indeed, IIMJobs, Foundit, HiringCafe, Talent500, and SimplyHired.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📊</div>
+                        <h3>Relevancy Match Scoring</h3>
+                        <p>AI compares every job against the candidate's profile and assigns a match percentage with a one-line explanation.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">👥</div>
+                        <h3>Multi-Client Management</h3>
+                        <p>Maintain unlimited client profiles in a persistent database. Switch between clients instantly with the sidebar.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📍</div>
+                        <h3>India-Focused Search</h3>
+                        <p>All searches are geo-targeted within India, with city-level filtering based on the candidate's preferred location.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">✉️</div>
+                        <h3>Outreach Generator <span style="font-size:0.7rem; background:#f59e0b20; color:#f59e0b; padding:2px 6px; border-radius:4px; margin-left:6px;">Coming Soon</span></h3>
+                        <p>Generate personalised outreach messages for HR, CEO, and C-Suite contacts — tailored to the specific job and candidate.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- VIEW: ABOUT -->
+        <div id="view-about" class="view hidden">
+            <section class="page-section">
+                <h2 class="section-title">About NJob AI</h2>
+                <p class="section-sub">Built for modern recruitment consultants who want to work smarter, not harder.</p>
+                <div class="about-content">
+                    <div class="about-block">
+                        <h3>🎯 Our Mission</h3>
+                        <p>Traditional job search is manual, slow, and inefficient. Recruiters waste hours copying and pasting job links, comparing descriptions by eye, and writing generic outreach messages. NJob AI automates all of that — letting you focus on the human side of recruitment: building relationships and closing placements.</p>
+                    </div>
+                    <div class="about-block">
+                        <h3>⚡ Technology Stack</h3>
+                        <p>NJob AI is powered by high-speed AI inference models for intelligent matching and relevancy scoring, Puppeteer for live multi-portal scraping across major Indian job platforms, and an Express backend with persistent JSON storage.</p>
+                    </div>
+                    <div class="about-block">
+                        <h3>🔒 Data Privacy</h3>
+                        <p>All client data is stored locally on your own machine in <code>data/clients.json</code>. No data is ever sent to external servers except for the AI API calls required for parsing and scoring. You remain in full control of your clients' information at all times.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- VIEW: CLIENT WORKSPACE -->
+        <div id="view-workspace" class="view hidden">
+
+            <!-- Add Client: Upload Step -->
+            <section id="step-upload" class="card fade-in hidden">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                    <h2>Upload Client Resume</h2>
+                    <button class="btn-ghost" id="btn-cancel-upload">✕ Cancel</button>
+                </div>
+                <p style="color:var(--text-muted); margin-bottom:20px;">Upload a PDF or text resume. Our AI will extract all key details automatically.</p>
+                <div class="upload-area" id="drop-zone">
+                    <input type="file" id="resume-input" accept=".pdf,.txt" hidden>
+                    <div class="upload-icon">📄</div>
+                    <button class="btn-primary" onclick="document.getElementById('resume-input').click()">Select Resume File</button>
+                    <p class="file-name" id="file-name-display">No file selected</p>
+                </div>
+                <button class="btn-primary full-width mt-4" id="btn-parse" disabled>Analyze Resume with AI ✨</button>
+            </section>
+
+            <!-- Add Client: Verify Step -->
+            <section id="step-verify" class="card fade-in hidden">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                    <h2>Verify Client Details</h2>
+                    <button class="btn-ghost" id="btn-cancel-verify">✕ Cancel</button>
+                </div>
+                <p style="color:var(--text-muted); margin-bottom:20px;">Review and edit the AI-extracted information before saving.</p>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="input-name" placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>Primary Industry</label>
+                        <input type="text" id="input-industry" placeholder="Finance, Technology...">
+                    </div>
+                    <div class="form-group">
+                        <label>Target Role</label>
+                        <input type="text" id="input-role" placeholder="VP Finance, Senior Engineer...">
+                    </div>
+                    <div class="form-group">
+                        <label>Preferred Location</label>
+                        <input type="text" id="input-location" placeholder="Mumbai, Bangalore...">
+                    </div>
+                </div>
+                <div class="form-group mt-4">
+                    <label>Experience Summary</label>
+                    <textarea id="input-summary" rows="3"></textarea>
+                </div>
+                <button class="btn-primary full-width mt-4" id="btn-save-client">Save Client Profile 💾</button>
+            </section>
+
+            <!-- Active Client: Job Search -->
+            <section id="step-client-workspace" class="fade-in hidden">
+                <div class="workspace-header">
+                    <div class="client-avatar" id="workspace-avatar">J</div>
+                    <div>
+                        <h2 id="workspace-client-name">Client Name</h2>
+                        <p id="workspace-client-role" style="color:var(--text-muted);">Role • Location</p>
+                    </div>
+                    <button class="btn-primary" id="btn-search-workspace" style="margin-left:auto;">
+                        🔍 Find Matching Jobs
+                    </button>
+                </div>
+
+                <div id="step-jobs" class="mt-4 hidden">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+                        <h3 id="jobs-count-label">Found Jobs</h3>
+                    </div>
+                    <div id="jobs-container"></div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="hidden">
+        <div class="spinner"></div>
+        <p id="loading-text">Processing...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
