@@ -8,6 +8,11 @@ async function launchBrowser() {
             '--disable-setuid-sandbox',
             '--disable-dev-shm-usage',
             '--disable-gpu',
+            '--no-zygote',
+            '--single-process',
+            '--disable-extensions',
+            '--disable-features=site-per-process',
+            '--js-flags=--max-old-space-size=128',
             '--disable-blink-features=AutomationControlled'
         ]
     };

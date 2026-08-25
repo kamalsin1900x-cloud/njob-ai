@@ -19,13 +19,16 @@ app.use(express.static('public'));
 const upload = multer({ storage: multer.memoryStorage() });
 
 // ─── AI Provider Setup ────────────────────────────────────────────────────
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const geminiKey = process.env.GEMINI_API_KEY || 'AQ.Ab8RN6Lmtq9apVCWlAMESqzO233yAv4DcV_6GBON20bdLk7GfQ';
+const groqKey   = process.env.GROQ_API_KEY || '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';
+
+const genAI = new GoogleGenerativeAI(geminiKey);
 
 let groq = null;
-if (process.env.GROQ_API_KEY) {
+if (groqKey) {
     try {
         const Groq = require('groq-sdk');
-        groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+        groq = new Groq({ apiKey: groqKey });
         console.log('✅ Groq initialised — will try Groq first, then Gemini as fallback.');
     } catch (e) {
         console.log('⚠️  groq-sdk not found — using Gemini only.');

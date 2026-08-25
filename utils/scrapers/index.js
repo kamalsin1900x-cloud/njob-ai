@@ -8,7 +8,8 @@ const indeedScraper = require('./indeed');
 const simplyhiredScraper = require('./simplyhired');
 
 /**
- * Orchestrator to run scrapers in batches to avoid overwhelming the CPU.
+ * Orchestrator to run scrapers sequentially (1-by-1) to stay well within
+ * Render's 512MB RAM free tier limit.
  */
 async function scrapeAllPortals(role, industry, location = 'India') {
     console.log(`Starting multi-portal scrape for: "${role}" in ${industry} @ ${location}`);
@@ -25,36 +26,29 @@ async function scrapeAllPortals(role, industry, location = 'India') {
     ];
 
     let allJobs = [];
-    const results = [];
 
-    // Run in batches of 3 to avoid launching 8 headless browsers at once
-    for (let i = 0; i < scrapers.length; i += 3) {
-        const batch = scrapers.slice(i, i + 3);
-        const batchPromises = batch.map(s => s.fn());
-        
-        console.log(`Running batch: ${batch.map(s => s.name).join(', ')}...`);
-        const batchResults = await Promise.allSettled(batchPromises);
-        
-        batchResults.forEach((result, idx) => {
-            const scraperName = batch[idx].name;
-            if (result.status === 'fulfilled') {
-                console.log(`✅ ${scraperName} returned ${result.value.length} jobs.`);
-                allJobs = allJobs.concat(result.value);
-            } else {
-                console.log(`❌ ${scraperName} failed completely: ${result.reason.message}`);
+    // Run 1 by 1 to keep RAM under 120MB on cloud instances
+    for (const scraper of scrapers) {
+        try {
+            console.log(`Running scraper: ${scraper.name}...`);
+            const jobs = await scraper.fn();
+            if (jobs && Array.isArray(jobs)) {
+                console.log(`✅ ${scraper.name} returned ${jobs.length} jobs.`);
+                allJobs = allJobs.concat(jobs);
             }
-        });
+        } catch (err) {
+            console.log(`❌ ${scraper.name} failed: ${err.message}`);
+        }
     }
 
-    // Filter out any non‑India results just in case
+    // Filter out any non‑India results
     const indiaJobs = allJobs.filter(job => {
         const lowerLink = (job.link || '').toLowerCase();
         const source = job.source || '';
-        // Keep if link points to an Indian domain or source is known Indian portal
         return lowerLink.includes('.in') || lowerLink.includes('india') || ['LinkedIn', 'Naukri', 'IIMJobs', 'Foundit', 'HiringCafe', 'Talent500', 'Indeed', 'SimplyHired'].includes(source);
     });
     
-    // Shuffle again for extra randomness
+    // Randomize
     const finalJobs = indiaJobs.sort(() => Math.random() - 0.5);
     return finalJobs;
 }
